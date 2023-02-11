@@ -62,7 +62,7 @@ if uploaded_file is not None:
 
         ## showing the top 20 words stat
         freq_word_df = top_20_words(df, selected_user)
-        st.title("Top 20 Frequently used Words")
+        st.title("Most Frequently used Words")
         # st.dataframe(freq_word_df)
         # rather than displaying it in a dataframe , showing this in a bar graph
         fig, ax = plt.subplots()
