@@ -2,6 +2,7 @@ from urlextract import URLExtract
 from wordcloud import WordCloud
 from collections import Counter  # collections is a module , Counter is a function.
 import pandas as pd
+import emoji
 
 
 def do_stats(df, selected_user):
@@ -81,9 +82,9 @@ def top_20_words(df, selected_user):
     top_words_list = []
     f = open("stopwords_hinglish.txt", 'r')
     stop_word = f.read()
-    for i in temp['message']:
-        for j in i.lower().split(
-                " "):  ## converting message each character into lower case , splitting each message(str) into a list of words.
+    for msg in temp['message']:
+        msg=emoji.replace_emoji(msg, '') # removing emoji from the string msg
+        for j in msg.lower().split(" "):## converting message each character into lower case , splitting each message(str) into a list of words.
             if j not in stop_word:
                 top_words_list.append(j)  # appending this word if it is not a stop-word
 
