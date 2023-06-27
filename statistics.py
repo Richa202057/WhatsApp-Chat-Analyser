@@ -11,26 +11,26 @@ def do_stats(df, selected_user):
         # creating a new dataframe for selected user which only those rows for user is the selected_user.
         df = df[df["user"] == selected_user]
 
-    ## then formorming our general level statistics on dataframe df
-    ## if it is user-level analysis , then df will automatically changed before (inside if block) comming to this part
+    ## Then performing our general level statistics on dataframe df
+    ## if it is user-level analysis, then df will automatically changed before (inside if block) coming to this part
 
     ## stat 1:- calculating total no. of messages
-    ## since total number of rows inside the dataframe will be the total no of msgs,so
+    ## Since the total number of rows inside the dataframe will be the total no of msgs, so
     msg = df.shape[0]
 
-    ## stat 2:- calculating total number of media shared
-    ##since at the place of media shared , media ommited is written in df["message] column, because
-    ## at the time of downloading the chat user must download it without-media .
+    ## stat 2:- calculating the total number of media shared
+    ##since at the place of media sharing, media omitted is written in df["message] column, because
+    ## at the time of downloading the chat user must download it without media.
 
     media = df[df["message"] == '<Media omitted>\n'].shape[0]
     ## it will create a new dataframe containg only <Media omitted>\n in the df["messages] column.
-    ## stat 3:- finding number of links shared in the group
+    ## stat 3:- finding a number of links shared in the group
     urlob = URLExtract()
     url_list = []
     for i in df["message"]:
         url_list.extend(urlob.find_urls(i))
-        # urlob is a list of all links extracted from each message of df["messages"] column
-    url_no = len(url_list)  # length of this list will be total links shared
+        # urlob is a list  object containing  all links extracted from each message of df["messages"] column
+    url_no = len(url_list)  # length of this list will be the total links shared
 
     # returning all 3 stats
     return msg, media, url_no
